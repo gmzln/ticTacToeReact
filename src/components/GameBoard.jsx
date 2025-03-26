@@ -21,8 +21,8 @@ export default function GameBoard() {
 
   return (
     <ol id="game-board">
-      {gameBoard.map((row, rowIndex) => {
-        <li key={index}>
+      {gameBoard.map((row, rowIndex) => (
+        <li key={rowIndex}>
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
@@ -32,8 +32,8 @@ export default function GameBoard() {
               </li>
             ))}
           </ol>
-        </li>;
-      })}
+        </li>
+      ))}
     </ol>
   );
 }
