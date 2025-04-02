@@ -3,7 +3,7 @@ import { useState } from "react";
 import Player from "./components/Player";
 import GameBoard from "./components/GameBoard";
 import Log from "./components/Log";
-import WINNING_COMBINATIONS from "./winning-combinations";
+import { WINNING_COMBINATIONS } from "./winning-combinations";
 import GameOver from "./components/GameOver";
 
 const PLAYERS = { X: "Player 1", O: "Player 2" };
@@ -46,15 +46,16 @@ function deriveWinner({ gameBoard, players }) {
   return winner;
 }
 
-function deriveGameBoard({ gameTurns }) {
+function deriveGameBoard(turns) {
   let gameBoard = [...INITIAL_GAME_BOARD.map((array) => [...array])];
 
-  for (const turn of gameTurns) {
+  for (const turn of turns) {
     const { square, player } = turn;
     const { row, col } = square;
 
     gameBoard[row][col] = player;
   }
+  console.log("Derived board:", gameBoard);
   return gameBoard;
 }
 
@@ -63,7 +64,7 @@ function App() {
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
   const gameBoard = deriveGameBoard(gameTurns);
-  const winner = deriveWinner(gameBoard, players);
+  const winner = deriveWinner({ gameBoard, players });
   const isDraw = gameTurns.length === 9 && !winner;
 
   function handleSelectSquare(rowIndex, colIndex) {

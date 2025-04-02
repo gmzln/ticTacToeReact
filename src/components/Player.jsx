@@ -23,7 +23,7 @@ export default function Player({
 
   return (
     <li className={isActive ? "active" : undefined}>
-      <span classinitial="player">
+      <span className="player">
         {!isEditing && <span className="player-name">{playerName}</span>}
         {isEditing && (
           <input
